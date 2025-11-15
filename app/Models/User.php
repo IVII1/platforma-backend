@@ -24,6 +24,7 @@ class User extends Authenticatable
         'role',
         'picture',
         'password',
+        'grade_book'
     ];
 
     /**
@@ -59,5 +60,17 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+    public function enrollments()
+    {
+        return $this->hasMany(EnrollmentRecord::class);
+    }
+    public function testResults()
+    {
+        return $this->hasMany(TestResult::class);
+    }
+    public function grades()
+    {
+        return $this->hasMany(Grade::class);
     }
 }

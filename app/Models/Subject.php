@@ -20,11 +20,6 @@ class Subject extends Model
         'curriculum_overview_file_path'
     ];
 
-    protected $casts = [
-        'has_prerequisites' => 'boolean',
-        'prerequisites' => 'array'
-    ];
-
     public function students()
     {
         return $this->belongsToMany(User::class);
@@ -43,5 +38,15 @@ class Subject extends Model
     public function prerequisite()
     {
         return $this->hasOne(Subject::class, 'prerequisite_subject_id');
+    }
+
+    public function tests()
+    {
+        return $this->hasMany(Test::class);
+    }
+
+    public function grades()
+    {
+        return $this->hasMany(Grade::class);
     }
 }

@@ -18,9 +18,8 @@ return new class extends Migration
             $table->enum('semester', ['winter', 'summer']);
             $table->enum('studies_type', ['bachelors', 'masters']);
             $table->foreignId('teacher_id')->constrained('users');
-            $table->foreignId('teaching_assistant_id')->nullable()->constrained('users');
-            $table->integer('ects_credits');
-            $table->foreignId('prerequisite_subject_id')->nullable()->constrained('subjects');
+            $table->foreignId('teaching_assistant_id');
+            $table->foreignId('prerequisite_subject_id')->nullable();
             $table->string('description_file_path');
             $table->string('grading_guide_file_path');
             $table->string('curriculum_overview_file_path');

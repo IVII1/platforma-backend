@@ -10,7 +10,6 @@ class Module extends Model
         'subject_id',
         'position',
         'title',
-        'description',
         'is_visible'
     ];
     public function subject()

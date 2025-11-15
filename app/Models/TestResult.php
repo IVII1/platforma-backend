@@ -6,5 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class TestResult extends Model
 {
-    //
+    protected $fillable = [
+        'test_id',
+        'student_id',
+        'points_attained'
+    ];
+    public function student()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function test()
+    {
+        return $this->belongsTo(Test::class);
+    }
 }

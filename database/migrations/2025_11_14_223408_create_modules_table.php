@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('subject_id')->constrained()->cascadeOnDelete();
             $table->integer('position');
             $table->string('title');
-            $table->text('description')->nullable();
             $table->boolean('is_visible')->default(false);
             $table->timestamps();
         });

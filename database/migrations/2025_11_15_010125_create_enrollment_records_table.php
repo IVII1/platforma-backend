@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('enrollment_database_id')->constrained()->cascadeOnDelete();
             $table->foreignId('student_id');
+            $table->string('grade_book');
+            $table->enum('status', ['pending', 'processed', 'dismissed']);
             $table->timestamps();
         });
     }
