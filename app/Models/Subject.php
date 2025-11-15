@@ -34,10 +34,12 @@ class Subject extends Model
     {
         return $this->belongsTo(User::class, 'teacher_id');
     }
+
     public function assistant()
     {
         return $this->beloo(User::class, 'teaching_assistant_id');
     }
+
     public function prerequisite()
     {
         return $this->hasOne(Subject::class, 'prerequisite_subject_id');
