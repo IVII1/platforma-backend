@@ -28,7 +28,7 @@ class UserRequest extends FormRequest
             'role' => 'required|in:student,admin,teacher',
             'picture' => 'image|mimes:png,jpg,jpeg|size:2048',
             'password' => 'required|string|min:8',
-            'grade_book' => 'required|regex:^[1-9]\d?/\d{2}$'
+            'grade_book' => 'nullable|regex:^[1-9]\d?/\d{2}$'
 
         ];
     }

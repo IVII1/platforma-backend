@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ModuleRequest extends FormRequest
+class EnrollmentDatabaseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,7 @@ class ModuleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'nullable|string',
-            'position' => 'nullable|integer',
-            'is_visible' => 'required|boolean'
-
+            'closes_at' => 'date_format:Y-m-d H:i:s|after:created_at'
         ];
     }
 }

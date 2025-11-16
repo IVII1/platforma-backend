@@ -22,7 +22,6 @@ class TestRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'subject_id' => 'required|exists:subjects,id',
             'test_type' => 'required|in:attencance,activity,midterm,final_exam,homework',
             'max_points' => 'required|integer|max:100'
         ];

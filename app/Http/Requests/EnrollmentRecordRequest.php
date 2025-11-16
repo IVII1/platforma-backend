@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ModuleRequest extends FormRequest
+class EnrollmentRecordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,8 @@ class ModuleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'nullable|string',
-            'position' => 'nullable|integer',
-            'is_visible' => 'required|boolean'
-
+            'student_id' => 'required|exists:users,id',
+            'grade_book' => 'required|exists:users,grade_book'
         ];
     }
 }

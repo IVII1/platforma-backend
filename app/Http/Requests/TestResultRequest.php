@@ -22,7 +22,6 @@ class TestResultRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'test_id' => 'required|exists:test_results,id',
             'student_id' => 'required|exists:users,id',
             'points_attained' => 'required|integer|min:0'
         ];
