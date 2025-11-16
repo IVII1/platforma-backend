@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('subject_id')->nullable();
             $table->string('title');
-            $table->text('body');
+            $table->longText('body');
             $table->timestamps();
         });
     }

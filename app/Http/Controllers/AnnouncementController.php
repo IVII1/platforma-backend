@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AnnouncementRequest;
 use App\Models\Announcement;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class AnnouncementController extends Controller
 {
@@ -12,15 +14,27 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        //
+        $announcements = Announcement::all();
+        $announcements->load('user');
+        return $announcements;
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AnnouncementRequest $request)
     {
-        //
+
+        $params = $request->validated();
+        $userId = Auth::id();
+        $announcement = Announcement::create([
+            'title' => $params['title'],
+            'body' => $params['body'],
+            'user_id' => $userId,
+            'subject_id' => null
+        ]);
+
+        return $announcement;
     }
 
     /**
