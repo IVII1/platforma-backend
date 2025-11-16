@@ -15,7 +15,7 @@ class Subject extends Model
         'teaching_assistant_id',
         'ects_credits',
         'prerequisite_subject_id',
-        'description_file_path',
+        'description',
         'grading_guide_file_path',
         'curriculum_overview_file_path'
     ];

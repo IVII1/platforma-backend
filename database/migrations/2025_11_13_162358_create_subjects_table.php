@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->enum('year', [1, 2, 3]);
-            $table->enum('semester', ['winter', 'summer']);
+            $table->enum('semester', ['winter', 'spring']);
             $table->enum('studies_type', ['bachelors', 'masters']);
             $table->foreignId('teacher_id')->constrained('users');
             $table->foreignId('teaching_assistant_id');
             $table->foreignId('prerequisite_subject_id')->nullable();
-            $table->string('description_file_path');
+            $table->longText('description');
             $table->string('grading_guide_file_path');
             $table->string('curriculum_overview_file_path');
             $table->timestamps();
