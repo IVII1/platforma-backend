@@ -4,18 +4,40 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AnnouncementRequest;
 use App\Models\Announcement;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 
 class AnnouncementController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $announcements = Announcement::all();
-        $announcements->load('user');
+        $author = $request->query('author');
+        $subject = $request->query('subject');
+        $search = $request->query('q');
+        $scope = $request->query('scope');
+
+        $query = Announcement::query();
+
+        if ($author) {
+            $query->where('user_id', $author);
+        }
+
+        if ($subject) {
+            $query->where('subject_id', $subject);
+        }
+
+        if ($search) {
+            $query->whereAny(['title', 'body'], 'like', "%{$search}%");
+        }
+        if ($scope == 'sitewide') {
+            $query->where('subject_id', null);
+        }
+
+        $announcements = $query->with('user', 'subject', 'comments')->paginate();
+
         return $announcements;
     }
 
