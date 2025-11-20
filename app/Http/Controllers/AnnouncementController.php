@@ -42,15 +42,19 @@ class AnnouncementController extends Controller
      */
     public function show(Announcement $announcement)
     {
-        //
+        $announcement->load(['user', 'subject']);
+        return $announcement;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Announcement $announcement)
+    public function update(AnnouncementRequest $request, Announcement $announcement)
     {
-        //
+        $params = $request->validated();
+        $announcement->update($params);
+        $announcement->load('user', 'subjcct');
+        return $announcement;
     }
 
     /**
@@ -58,6 +62,7 @@ class AnnouncementController extends Controller
      */
     public function destroy(Announcement $announcement)
     {
-        //
+        $announcement->delete();
+        return response()->json(['message' => 'announcement deleted successfully!']);
     }
 }
