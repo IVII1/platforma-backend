@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -12,15 +14,22 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        return Comment::all();
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function storeReply(CommentRequest $request, Comment $parent)
     {
-        //
+        $params = $request->validated();
+        $comment = Comment::create([
+            'user_id' => Auth::id(),
+            'announcement_id' => $parent->announcement->id,
+            'parent_id' => $parent->id,
+            'content' => $params['content'],
+        ]);
+        return $comment;
     }
 
     /**
@@ -28,15 +37,18 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
+        $comment->load('user', 'replies');
+        return $comment;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comment $comment)
+    public function update(CommentRequest $request, Comment $comment)
     {
-        //
+        $params = $request->validated();
+        $comment->update($params);
+        return $comment;
     }
 
     /**
@@ -44,6 +56,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+        return response()->json(['message' => 'Comment deleted successfully']);
     }
 }

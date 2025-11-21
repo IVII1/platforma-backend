@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AnnouncementRequest;
+use App\Http\Requests\CommentRequest;
 use App\Models\Announcement;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,7 +38,7 @@ class AnnouncementController extends Controller
             $query->where('subject_id', null);
         }
 
-        $announcements = $query->with('user', 'subject', 'comments')->paginate();
+        $announcements = $query->with('user', 'subject')->paginate();
 
         return $announcements;
     }
@@ -64,7 +66,11 @@ class AnnouncementController extends Controller
      */
     public function show(Announcement $announcement)
     {
-        $announcement->load(['user', 'subject']);
+        $announcement->load(['user', 'subject', 'comments' => function ($query) {
+            $query->withCount('replies');
+        }])
+            ->loadCount(['comments']);
+
         return $announcement;
     }
 
@@ -75,7 +81,7 @@ class AnnouncementController extends Controller
     {
         $params = $request->validated();
         $announcement->update($params);
-        $announcement->load('user', 'subjcct');
+        $announcement->load('user', 'subject');
         return $announcement;
     }
 
@@ -86,5 +92,18 @@ class AnnouncementController extends Controller
     {
         $announcement->delete();
         return response()->json(['message' => 'announcement deleted successfully!']);
+    }
+
+    public function storeComment(CommentRequest $request, Announcement $announcement)
+    {
+        $params = $request->validated();
+        $userId = Auth::id();
+        $comment = Comment::create([
+            'announcement_id' => $announcement->id,
+            'parent_id' => null,
+            'content' => $params['content'],
+            'user_id' => $userId
+        ]);
+        return $comment;
     }
 }
