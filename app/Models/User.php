@@ -56,7 +56,7 @@ class User extends Authenticatable
     }
     public function subjects()
     {
-        return $this->hasMany(Subject::class);
+        return $this->belongsToMany(Subject::class);
     }
     public function comments()
     {
@@ -64,14 +64,14 @@ class User extends Authenticatable
     }
     public function enrollments()
     {
-        return $this->hasMany(EnrollmentRecord::class);
+        return $this->hasMany(EnrollmentRecord::class, 'student_id');
     }
     public function testResults()
     {
-        return $this->hasMany(TestResult::class);
+        return $this->hasMany(TestResult::class, 'student_id');
     }
     public function grades()
     {
-        return $this->hasMany(Grade::class);
+        return $this->hasMany(Grade::class, 'student_id');
     }
 }

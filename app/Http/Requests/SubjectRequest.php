@@ -23,16 +23,16 @@ class SubjectRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'semester' => 'required|in:spring,winter',
+            'semester' => 'required|in:summer,winter',
             'year' => 'required|integer|min:1|max:3',
             'studies_type' => 'required|in:bachelors,masters',
             'teacher_id' => 'required|exists:users,id',
             'teaching_assistant_id' => 'nullable|exists:users,id',
             'prerquisite_subject_id' => 'nullable|exists:subjects,id',
-            'ects_credits' => 'required|integer|max:10|min:1',
+            'credits' => 'required|integer|max:10|min:1',
             'description' => 'required|string',
-            'grading_guide' => 'file|mimes:txt,docx,pdf,xlsx,csv,md,rtf|size:5120',
-            'curriculum_overview' => 'file|mimes:txt,docx,pdf,xlsx,csv,md,rtf|size:5120'
+            'grading_guide' => 'file|mimes:txt,docx,pdf,xlsx,csv,md,rtf|max:5120',
+            'curriculum_overview' => 'file|mimes:txt,docx,pdf,xlsx,csv,md,rtf|max:5120'
         ];
     }
 }

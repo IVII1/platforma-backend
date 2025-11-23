@@ -13,7 +13,7 @@ class Subject extends Model
         'studies_type',
         'teacher_id',
         'teaching_assistant_id',
-        'ects_credits',
+        'credits',
         'prerequisite_subject_id',
         'description',
         'grading_guide_file_path',
@@ -32,7 +32,7 @@ class Subject extends Model
 
     public function assistant()
     {
-        return $this->beloo(User::class, 'teaching_assistant_id');
+        return $this->belongsTo(User::class, 'teaching_assistant_id');
     }
 
     public function prerequisite()

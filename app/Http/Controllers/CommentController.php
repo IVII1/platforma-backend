@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
@@ -14,7 +13,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        return Comment::all();
+        $comments = Comment::query();
+        return $comments->paginate();
     }
 
     /**
