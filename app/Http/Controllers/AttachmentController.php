@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AttachmentRequest;
 use App\Models\Attachment;
+use App\Models\Module;
 use Illuminate\Http\Request;
 
 class AttachmentController extends Controller
@@ -12,15 +14,15 @@ class AttachmentController extends Controller
      */
     public function index()
     {
-        //
+        return Attachment::all();
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AttachmentRequest $request, Module $module)
     {
-        //
+        $params = $request->validated();
     }
 
     /**

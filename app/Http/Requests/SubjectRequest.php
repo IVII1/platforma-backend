@@ -31,8 +31,8 @@ class SubjectRequest extends FormRequest
             'prerquisite_subject_id' => 'nullable|exists:subjects,id',
             'credits' => 'required|integer|max:10|min:1',
             'description' => 'required|string',
-            'grading_guide' => 'file|mimes:txt,docx,pdf,xlsx,csv,md,rtf|max:5120',
-            'curriculum_overview' => 'file|mimes:txt,docx,pdf,xlsx,csv,md,rtf|max:5120'
+            'grading_guide' => 'nullable|file|mimes:txt,docx,pdf,xlsx,csv,md,rtf|max:5120',
+            'curriculum_overview' => 'nullable|file|mimes:txt,docx,pdf,xlsx,csv,md,rtf|max:5120'
         ];
     }
 }

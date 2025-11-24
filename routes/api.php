@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\SubjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,4 +29,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('announcements/{announcement}/comments', [AnnouncementController::class, 'storeComment']);
     Route::apiResource('/comments', CommentController::class);
     Route::apiResource('/subjects', SubjectController::class);
+    Route::apiResource('/modules', ModuleController::class)->except('store');
+    Route::post('subjects/{subject}/modules', [ModuleController::class, 'store']);
 });

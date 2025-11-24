@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('attachments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('module_id');
+            $table->foreignId('module_id')->constrained()->cascadeOnDelete();
             $table->integer('position');
             $table->enum('attachment_type', ['file', 'external_link', 'article']);
             $table->string('attachment_name');

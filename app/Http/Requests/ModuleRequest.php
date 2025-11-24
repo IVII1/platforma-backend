@@ -22,7 +22,7 @@ class ModuleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'nullable|string',
+            'title' => 'required|string',
             'position' => 'nullable|integer',
             'is_visible' => 'required|boolean'
 
