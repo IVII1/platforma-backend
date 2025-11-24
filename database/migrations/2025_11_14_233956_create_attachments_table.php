@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('attachment_type', ['file', 'external_link', 'article']);
             $table->string('attachment_name');
             $table->string('attachment_path')->nullable();
-            $table->longText('artictle_content')->nullable();
+            $table->longText('article_content')->nullable();
             $table->timestamps();
         });
     }

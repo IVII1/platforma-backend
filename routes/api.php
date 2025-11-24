@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ModuleController;
@@ -31,4 +32,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/subjects', SubjectController::class);
     Route::apiResource('/modules', ModuleController::class)->except('store');
     Route::post('subjects/{subject}/modules', [ModuleController::class, 'store']);
+    Route::apiResource('/attachments', AttachmentController::class)->except('store');
+    Route::post('modules/{module}/attachments', [AttachmentController::class, 'store']);
 });

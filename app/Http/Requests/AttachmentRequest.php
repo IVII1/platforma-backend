@@ -23,8 +23,9 @@ class AttachmentRequest extends FormRequest
     {
         return [
             'attachment_type' => 'required|in:file,article,external_link',
-            'attachment_path' => 'required_unless:attachemt_type,article|string',
-            'attachemnt_name' => 'required|string',
+            'attachment' => 'required_if:attachemt_type,file|file|mimes:txt,pdf,docx,xlsk,md',
+            'attachment_url' => 'required_if:attachemt_type,external_link|url',
+            'attachment_name' => 'required|string',
             'article_content' => 'required_if:attachment_type,article'
         ];
     }
